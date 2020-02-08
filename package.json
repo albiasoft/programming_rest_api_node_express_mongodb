@@ -1,0 +1,11 @@
+{
+  "name": "users_rest_api",
+  "version": "0.0.0",
+  "description": "Implementation of a REST-API server using ExpressJS and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Albert Nadal Garriga",
+  "license": "MIT"
+}
