@@ -1,4 +1,5 @@
 var Config = require("../../config.js");
+var UserManager = require("./UserManager.js")
 
 module.exports = class APIServer {
   constructor(port) {
@@ -39,36 +40,80 @@ module.exports = class APIServer {
     /* POST /users */
     this._express.post("/users", function(req, res) {
       console.log("POST /users");
-      res.writeHead(200);
-      res.end();
+
+      UserManager.createUser(req.body, function(user, success) {
+        if (success) {
+          res.writeHead(200);
+          res.end(JSON.stringify(user));
+        } else {
+          res.writeHead(500);
+          res.end();
+        }
+      });
+
     }).bind(this);
 
     /* GET /users/:id */
     this._express.get("/users/:id", function(req, res) {
       console.log("GET /users/"+req.params.id);
-      res.writeHead(200);
-      res.end();
+
+      UserManager.getUserWithId(Number(req.params.id), function(user, success) {
+        if(success) {
+          res.writeHead(200);
+          res.end(JSON.stringify(user));
+        } else {
+          res.writeHead(500);
+          res.end();
+        }
+      });
+
     }).bind(this);
 
     /* DELETE /users/:id */
     this._express.delete("/users/:id", function(req, res) {
       console.log("DELETE /users/"+req.params.id);
-      res.writeHead(200);
-      res.end();
+
+      UserManager.deleteUserWithId(Number(req.params.id), function(success) {
+        if(success) {
+          res.writeHead(200);
+          res.end(JSON.stringify({}));
+        } else {
+          res.writeHead(500);
+          res.end();
+        }
+      });
+
     }).bind(this);
 
     /* PUT /users/:id */
     this._express.put("/users/:id", function(req, res) {
       console.log("PUT /users/"+req.params.id);
-      res.writeHead(200);
-      res.end();
+
+      UserManager.updateUserWithId(Number(req.params.id), req.body, function(success) {
+        if(success) {
+          res.writeHead(200);
+          res.end(JSON.stringify({}));
+        } else {
+          res.writeHead(500);
+          res.end();
+        }
+      });
+
     }).bind(this);
 
     /* GET /users */
     this._express.get("/users", function(req, res) {
       console.log("GET /users");
-      res.writeHead(200);
-      res.end(["albert", "sílvia", "pau"]);
+
+      UserManager.getUsers(function(users, success) {
+        if(success) {
+          res.writeHead(200);
+          res.end(JSON.stringify(users));
+        } else {
+          res.writeHead(500);
+          res.end();
+        }
+      });
     }).bind(this);
 
   }

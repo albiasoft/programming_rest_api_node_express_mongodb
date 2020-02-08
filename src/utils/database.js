@@ -1,7 +1,7 @@
 var mongojs = require("mongojs");
 var Config = require("../../config.js");
 
-module.export = {
+module.exports = {
   openConnection: openConnection,
   closeConnection: closeConnection
 };
@@ -14,7 +14,7 @@ function openConnection() {
     mongo_url = "mongodb://"+Config.database.user+":"+Config.database.password+"@"+Config.database.host+":"+Config.database.port+"/"+Config.database.database;
   }
 
-  return mongojs(mongo_url, [])
+  return mongojs(mongo_url, ['users'])
 }
 
 function closeConnection(db) {
