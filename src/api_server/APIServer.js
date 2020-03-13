@@ -13,7 +13,7 @@ module.exports = class APIServer {
 
       res.header("Access-Control-Allow-Credentials", true);
       res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE");
-      res.header("Accedd-Control-Allow-Header", "Origin, Content-Type, Accept");
+      res.header("Access-Control-Allow-Header", "Origin, Content-Type, Accept");
       res.header("Content-Type", "application/json;charset=utf-8");
       next();
     });
