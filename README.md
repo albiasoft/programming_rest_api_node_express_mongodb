@@ -1,1 +1,1 @@
-# Users REST-API using ExpressJS and MongoDB
+# Users REST-API using Node, ExpressJS and MongoDB
